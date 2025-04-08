@@ -155,11 +155,7 @@ def process_selection_media_panel(selection):
     """Process the selection."""
     message(TITLE_VERSION)
     message(f'Script called from {__file__}')
-    try:
-        paths = get_paths_media_panel(selection)
-    except:
-        message('Error!  Could not extract path.')
-        paths = []
+    paths = get_paths_media_panel(selection)
     copy_to_clipboard('\n'.join(paths))
     message(f'Sent {len(paths)} path{plural_s(paths)} to the clipboard.')
     message('Done!')
@@ -169,11 +165,7 @@ def process_selection_timeline(selection):
     """Process the selection."""
     message(TITLE_VERSION)
     message(f'Script called from {__file__}')
-    try:
-        paths = get_paths_timeline(selection)
-    except:
-        message('Error!  Could not extract path.')
-        paths = []
+    paths = get_paths_timeline(selection)
     copy_to_clipboard('\n'.join(paths))
     message(f'Sent {len(paths)} path{plural_s(paths)} to the clipboard.')
     message('Done!')
