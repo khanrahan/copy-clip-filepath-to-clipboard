@@ -140,6 +140,17 @@ def get_paths_timeline(selection):
     return paths
 
 
+def plural_s(item):
+    """Examine an item's length and return an 's' if necessary.
+
+    Used to add a trailing s to a name in an fstring if it should be plural.  Zero or
+    multiple will return a trailing s.
+
+    https://stackoverflow.com/questions/21872366/plural-string-formatting
+    """
+    return f'{"s"[:len(item) ^ 1]}'
+
+
 def process_selection_media_panel(selection):
     """Process the selection."""
     message(TITLE_VERSION)
@@ -150,8 +161,7 @@ def process_selection_media_panel(selection):
         message('Error!  Could not extract path.')
         paths = []
     copy_to_clipboard('\n'.join(paths))
-    # see following link to explain that fstring trick https://stackoverflow.com/questions/21872366/plural-string-formatting
-    message(f'Sent {len(paths)} path{"s"[:len(paths) ^ 1]} to the clipboard.')
+    message(f'Sent {len(paths)} path{plural_s(paths)} to the clipboard.')
     message('Done!')
 
 
@@ -165,8 +175,7 @@ def process_selection_timeline(selection):
         message('Error!  Could not extract path.')
         paths = []
     copy_to_clipboard('\n'.join(paths))
-    # see following link to explain that fstring trick https://stackoverflow.com/questions/21872366/plural-string-formatting
-    message(f'Sent {len(paths)} path{"s"[:len(paths) ^ 1]} to the clipboard.')
+    message(f'Sent {len(paths)} path{plural_s(paths)} to the clipboard.')
     message('Done!')
 
 
