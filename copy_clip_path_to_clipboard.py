@@ -8,7 +8,7 @@ Flame Version: 2025
 URL: http://github.com/khanrahan/copy-clip-path-to-clipboard
 
 Creation Date: 04.07.25
-Update Date: 04.07.25
+Update Date: 04.08.25
 
 Description:
 
