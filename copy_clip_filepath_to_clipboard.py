@@ -2,13 +2,13 @@
 Script Name: Copy Clip Filepath to Clipboard
 Written by: Kieran Hanrahan
 
-Script Version: 1.1.0
+Script Version: 1.2.0
 Flame Version: 2025
 
 URL: http://github.com/khanrahan/copy-clip-filepath-to-clipboard
 
 Creation Date: 04.07.25
-Update Date: 04.08.25
+Update Date: 04.10.25
 
 Description:
 
@@ -40,7 +40,7 @@ import flame
 from PySide6 import QtWidgets
 
 TITLE = 'Copy Clip Filepath to Clipboard'
-VERSION_INFO = (1, 1, 0)
+VERSION_INFO = (1, 2, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
 TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
