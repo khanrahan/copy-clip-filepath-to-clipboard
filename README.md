@@ -1,8 +1,8 @@
-# Copy Clip Path to Clipboard
+# Copy Clip Filepath to Clipboard
 
 Plugin for [Autodesk Flame software](http://www.autodesk.com/products/flame).
 
-Copy the source paths of the segments contained within the selected clips or sequences.
+Copy the source filepaths of the segments contained within the selected clips or sequences.
 
 ## Example
 The format will match what is listed in  the **Clip Location** column in the Conform tab.  For example:
@@ -17,9 +17,9 @@ The format will match what is listed in  the **Clip Location** column in the Con
 ## Installation
 
 ### Flame 2025 and newer
-To make available to all users on the workstation, copy `copy_clip_path_to_clipboard.py` to `/opt/Autodesk/shared/python/`
+To make available to all users on the workstation, copy `copy_clip_filepath_to_clipboard.py` to `/opt/Autodesk/shared/python/`
 
-For specific users, copy `copy_clip_path_to_clipboard.py` to the appropriate path below...
+For specific users, copy `copy_clip_filepath_to_clipboard.py` to the appropriate path below...
 |Platform|Path|
 |---|---|
 |Linux|`/home/<user_name>/flame/python/`|
@@ -29,8 +29,8 @@ For specific users, copy `copy_clip_path_to_clipboard.py` to the appropriate pat
 Finally, inside of Flame, go to Flame (fish) menu `->` Python `->` Rescan Python Hooks
 
 ## Menus
-- Right-click selected items on the Desktop `->` Copy... `->` Clip Path to Clipboard
-- Right-click selected items in the Media Panel `->` Copy... `->` Clip Path to Clipboard
+- Right-click selected items on the Desktop `->` Copy... `->` Clip Filepath to Clipboard
+- Right-click selected items in the Media Panel `->` Copy... `->` Clip Filepath to Clipboard
 
 ## Acknowledgements
 Many thanks to [pyflame.com](http://www.pyflame.com)
