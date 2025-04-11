@@ -1,23 +1,25 @@
 """
-Script Name: Copy Clip Path to Clipboard
+Script Name: Copy Clip Filepath to Clipboard
 Written by: Kieran Hanrahan
 
-Script Version: 1.1.0
+Script Version: 1.2.0
 Flame Version: 2025
 
-URL: http://github.com/khanrahan/copy-clip-path-to-clipboard
+URL: http://github.com/khanrahan/copy-clip-filepath-to-clipboard
 
 Creation Date: 04.07.25
-Update Date: 04.08.25
+Update Date: 04.10.25
 
 Description:
 
-    Copy the paths of the segments contained within the selected clips or sequences.
+    Copy the filepaths of the segments contained within the selected clips or sequences.
 
 Menus:
 
-    Right-click selected items on the Desktop --> Copy... --> Copy Path to Clipboard
-    Right-click selected items in the Media Panel --> Copy... --> Copy Path to Clipboard
+    Right-click selected items on the Desktop --> Copy... -->
+        Copy Filepath to Clipboard
+    Right-click selected items in the Media Panel --> Copy... -->
+        Copy Filepath to Clipboard
 
 To Install:
 
@@ -37,8 +39,8 @@ import re
 import flame
 from PySide6 import QtWidgets
 
-TITLE = 'Copy Clip Path to Clipboard'
-VERSION_INFO = (1, 1, 0)
+TITLE = 'Copy Clip Filepath to Clipboard'
+VERSION_INFO = (1, 2, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
 TITLE_VERSION = f'{TITLE} v{VERSION}'
 MESSAGE_PREFIX = '[PYTHON]'
@@ -109,7 +111,7 @@ def get_clip_location(segment):
 
 
 def get_paths_media_panel(selection):
-    """Loop through the selected clips and copy paths for each segment."""
+    """Loop through the selected clips and copy filepaths for each segment."""
     paths = []
     for clip in selection:
         for version in clip.versions:
@@ -124,7 +126,7 @@ def get_paths_media_panel(selection):
 
 
 def get_paths_timeline(selection):
-    """Loop through the selected clips and copy paths for each segment.
+    """Loop through the selected clips and copy filepaths for each segment.
 
     Skip PyTransitions that might be included in the selection due to a range of
     segments selection performed using shift + click.
@@ -157,7 +159,7 @@ def process_selection_media_panel(selection):
     message(f'Script called from {__file__}')
     paths = get_paths_media_panel(selection)
     copy_to_clipboard('\n'.join(paths))
-    message(f'Sent {len(paths)} path{plural_s(paths)} to the clipboard.')
+    message(f'Sent {len(paths)} filepath{plural_s(paths)} to the clipboard.')
     message('Done!')
 
 
@@ -167,7 +169,7 @@ def process_selection_timeline(selection):
     message(f'Script called from {__file__}')
     paths = get_paths_timeline(selection)
     copy_to_clipboard('\n'.join(paths))
-    message(f'Sent {len(paths)} path{plural_s(paths)} to the clipboard.')
+    message(f'Sent {len(paths)} filepath{plural_s(paths)} to the clipboard.')
     message('Done!')
 
 
@@ -194,7 +196,7 @@ def scope_timeline_objects(selection):
 def get_media_panel_custom_ui_actions():
     """Python hook to add item to Media Panel or Desktop Reels right click menu."""
     return [{'name': 'Copy...',
-             'actions': [{'name': 'Clip Path to Clipboard',
+             'actions': [{'name': 'Clip Filepath to Clipboard',
                           'isVisible': scope_media_panel_objects,
                           'execute': process_selection_media_panel,
                           'minimumVersion': '2025.0.0.0',
@@ -205,7 +207,7 @@ def get_media_panel_custom_ui_actions():
 def get_timeline_custom_ui_actions():
     """Python hook to add custom right click menu item to Timeline."""
     return [{'name': 'Copy...',
-             'actions': [{'name': 'Clip Path to Clipboard',
+             'actions': [{'name': 'Clip Filepath to Clipboard',
                           'isVisible': scope_timeline_objects,
                           'execute': process_selection_timeline,
                           'minimumVersion': '2025.0.0.0'}]
