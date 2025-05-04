@@ -1,11 +1,11 @@
 """
-Script Name: Copy Clip Filepath to Clipboard
+Script Name: Copy Filepath to Clipboard
 Written by: Kieran Hanrahan
 
 Script Version: 1.2.0
 Flame Version: 2025
 
-URL: http://github.com/khanrahan/copy-clip-filepath-to-clipboard
+URL: http://github.com/khanrahan/copy-filepath-to-clipboard
 
 Creation Date: 04.07.25
 Update Date: 04.10.25
@@ -16,10 +16,8 @@ Description:
 
 Menus:
 
-    Right-click selected items on the Desktop --> Copy... -->
-        Copy Filepath to Clipboard
-    Right-click selected items in the Media Panel --> Copy... -->
-        Copy Filepath to Clipboard
+    Right-click selected items on the Desktop --> Copy... --> Filepath to Clipboard
+    Right-click selected items in the Media Panel --> Copy... --> Filepath to Clipboard
 
 To Install:
 
@@ -39,7 +37,7 @@ import re
 import flame
 from PySide6 import QtWidgets
 
-TITLE = 'Copy Clip Filepath to Clipboard'
+TITLE = 'Copy Filepath to Clipboard'
 VERSION_INFO = (1, 2, 0)
 VERSION = '.'.join([str(num) for num in VERSION_INFO])
 TITLE_VERSION = f'{TITLE} v{VERSION}'
@@ -196,7 +194,7 @@ def scope_timeline_objects(selection):
 def get_media_panel_custom_ui_actions():
     """Python hook to add item to Media Panel or Desktop Reels right click menu."""
     return [{'name': 'Copy...',
-             'actions': [{'name': 'Clip Filepath to Clipboard',
+             'actions': [{'name': 'Filepath to Clipboard',
                           'isVisible': scope_media_panel_objects,
                           'execute': process_selection_media_panel,
                           'minimumVersion': '2025.0.0.0',
@@ -207,7 +205,7 @@ def get_media_panel_custom_ui_actions():
 def get_timeline_custom_ui_actions():
     """Python hook to add custom right click menu item to Timeline."""
     return [{'name': 'Copy...',
-             'actions': [{'name': 'Clip Filepath to Clipboard',
+             'actions': [{'name': 'Filepath to Clipboard',
                           'isVisible': scope_timeline_objects,
                           'execute': process_selection_timeline,
                           'minimumVersion': '2025.0.0.0'}]
