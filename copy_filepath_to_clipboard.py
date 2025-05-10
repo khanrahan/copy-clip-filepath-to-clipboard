@@ -128,15 +128,19 @@ def get_paths_timeline(selection):
 
     Skip PyTransitions that might be included in the selection due to a range of
     segments selection performed using shift + click.
+
+    Only add the path to results once and therefore return a list of unique paths.
     """
+    segments = (item for item in selection if not isinstance(item, flame.PyTransition))
     paths = []
-    for item in selection:
-        if not isinstance(item, flame.PyTransition):
-            if test_image_seq(item, IMAGE_SEQ_EXTS):
-                paths.append(get_clip_location(item))
-            else:
-                if item.file_path:
-                    paths.append(item.file_path)
+    for segment in segments:
+        if (test_image_seq(segment, IMAGE_SEQ_EXTS) and
+            get_clip_location(segment) not in paths
+        ):
+            paths.append(get_clip_location(segment))
+        else:
+            if segment.file_path and segment.file_path not in paths:
+                paths.append(segment.file_path)
     return paths
 
 
