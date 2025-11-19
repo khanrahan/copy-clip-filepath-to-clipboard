@@ -5,7 +5,7 @@ Plugin for [Autodesk Flame software](http://www.autodesk.com/products/flame).
 Copy the source filepaths of the segments contained within the selected clips or sequences.
 
 ## Example
-The format will match what is listed in  the **Clip Location** column in the Conform tab.  For example:
+The format will match what is listed in the **Clip Location** column in the Conform tab.  For example:
 
 `/path/path/path/file.[0001-0100].ext`
 
