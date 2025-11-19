@@ -51,7 +51,7 @@ IMAGE_SEQ_EXTS = (
 )
 
 MEDIA_PANEL_OBJECTS = (
-        flame.PyClip,
+        flame.PyMediaHubFilesEntry,
 )
 
 TIMELINE_OBJECTS = (
@@ -108,18 +108,26 @@ def get_clip_location(segment):
     return f'{path}.{file_and_sep}[{segment.start_frame}-{end_frame}]{ext}'
 
 
+def get_paths_media_hub(selection):
+    """Loop through the selected clips and copy filepaths for each segment."""
+
+
+
 def get_paths_media_panel(selection):
     """Loop through the selected clips and copy filepaths for each segment."""
+    segments = (segment for clip in selection
+                for version in clip.versions
+                for track in version.tracks
+                for segment in track.segments
+    )
     paths = []
-    for clip in selection:
-        for version in clip.versions:
-            for track in version.tracks:
-                for segment in track.segments:
-                    if test_image_seq(segment, IMAGE_SEQ_EXTS):
-                        paths.append(get_clip_location(segment))
-                    else:
-                        if segment.file_path:
-                            paths.append(segment.file_path)
+
+    for segment in segments:
+        if test_image_seq(segment, IMAGE_SEQ_EXTS):
+            paths.append(get_clip_location(segment))
+        else:
+            if segment.file_path:
+                paths.append(segment.file_path)
     return paths
 
 
@@ -155,6 +163,16 @@ def plural_s(item):
     return f'{"s"[:len(item) ^ 1]}'
 
 
+def process_selection_media_hub(selection):
+    """Process the selection."""
+    message(TITLE_VERSION)
+    message(f'Script called from {__file__}')
+    paths = get_paths_media_panel(selection)
+    copy_to_clipboard('\n'.join(paths))
+    message(f'Sent {len(paths)} filepath{plural_s(paths)} to the clipboard.')
+    message('Done!')
+
+
 def process_selection_media_panel(selection):
     """Process the selection."""
     message(TITLE_VERSION)
@@ -180,6 +198,11 @@ def scope_selection(selection, objects):
     return all(isinstance(item, objects) for item in selection)
 
 
+def scope_mediahub_objects(selection):
+    """Filter out only supported MediaHub exobjects."""
+    return scope_selection(selection, MEDIAHUB_OBJECTS)
+
+
 def scope_media_panel_objects(selection):
     """Filter for timeline objects."""
     return scope_selection(selection, MEDIA_PANEL_OBJECTS)
@@ -193,6 +216,16 @@ def scope_timeline_objects(selection):
     select multiple segments using ctrl + click which is less convenient.
     """
     return scope_selection(selection, TIMELINE_OBJECTS)
+
+
+def get_mediahub_files_custom_ui_actions():
+    """Python hook to add custom right click menu item to MediaHub."""
+    return [{'name': 'Copy...',
+             'actions': [{'name': 'Name to Clipboard',
+                          'isVisible': scope_mediahub_objects,
+                          'execute': process_selection_media_panel,
+                          'minimumVersion': '2025.0.0.0',
+            }]
 
 
 def get_media_panel_custom_ui_actions():
