@@ -12,10 +12,11 @@ Update Date: 05.09.25
 
 Description:
 
-    Copy the filepaths of the segments contained within the selected clips or sequences.
+    Copy the filepaths of the selected items.
 
 Menus:
 
+    Right-click selected items in the MediaHub --> Copy... --> Filepath to Clipboard
     Right-click selected items on the Desktop --> Copy... --> Filepath to Clipboard
     Right-click selected items in the Media Panel --> Copy... --> Filepath to Clipboard
 
@@ -48,6 +49,11 @@ IMAGE_SEQ_EXTS = (
         'jpg',
         'png',
         'tif',
+)
+
+MEDIAHUB_OBJECTS = (
+        flame.PyMediaHubFilesEntry,
+        flame.PyMediaHubFilesFolder,
 )
 
 MEDIA_PANEL_OBJECTS = (
@@ -108,9 +114,12 @@ def get_clip_location(segment):
     return f'{path}.{file_and_sep}[{segment.start_frame}-{end_frame}]{ext}'
 
 
-def get_paths_media_hub(selection):
+def get_paths_mediahub(selection):
     """Loop through the selected clips and copy filepaths for each segment."""
-
+    paths = []
+    for item in selection:
+        paths.append(item.path)
+    return paths
 
 
 def get_paths_media_panel(selection):
@@ -163,11 +172,11 @@ def plural_s(item):
     return f'{"s"[:len(item) ^ 1]}'
 
 
-def process_selection_media_hub(selection):
+def process_selection_mediahub(selection):
     """Process the selection."""
     message(TITLE_VERSION)
     message(f'Script called from {__file__}')
-    paths = get_paths_media_panel(selection)
+    paths = get_paths_mediahub(selection)
     copy_to_clipboard('\n'.join(paths))
     message(f'Sent {len(paths)} filepath{plural_s(paths)} to the clipboard.')
     message('Done!')
@@ -221,10 +230,11 @@ def scope_timeline_objects(selection):
 def get_mediahub_files_custom_ui_actions():
     """Python hook to add custom right click menu item to MediaHub."""
     return [{'name': 'Copy...',
-             'actions': [{'name': 'Name to Clipboard',
+             'actions': [{'name': 'Filepath to Clipboard',
                           'isVisible': scope_mediahub_objects,
-                          'execute': process_selection_media_panel,
+                          'execute': process_selection_mediahub,
                           'minimumVersion': '2025.0.0.0',
+                        }]
             }]
 
 
