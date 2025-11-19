@@ -124,10 +124,11 @@ def get_paths_mediahub(selection):
 
 def get_paths_media_panel(selection):
     """Loop through the selected clips and copy filepaths for each segment."""
-    segments = (segment for clip in selection
-                for version in clip.versions
-                for track in version.tracks
-                for segment in track.segments
+    segments = (
+        segment for clip in selection
+        for version in clip.versions
+        for track in version.tracks
+        for segment in track.segments
     )
     paths = []
 
@@ -151,7 +152,8 @@ def get_paths_timeline(selection):
     segments = (item for item in selection if not isinstance(item, flame.PyTransition))
     paths = []
     for segment in segments:
-        if (test_image_seq(segment, IMAGE_SEQ_EXTS) and
+        if (
+            test_image_seq(segment, IMAGE_SEQ_EXTS) and
             get_clip_location(segment) not in paths
         ):
             paths.append(get_clip_location(segment))
