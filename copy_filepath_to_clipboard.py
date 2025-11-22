@@ -57,7 +57,7 @@ MEDIAHUB_OBJECTS = (
 )
 
 MEDIA_PANEL_OBJECTS = (
-        flame.PyMediaHubFilesEntry,
+        flame.PyClip,
 )
 
 TIMELINE_OBJECTS = (
@@ -231,31 +231,38 @@ def scope_timeline_objects(selection):
 
 def get_mediahub_files_custom_ui_actions():
     """Python hook to add custom right click menu item to MediaHub."""
-    return [{'name': 'Copy...',
-             'actions': [{'name': 'Filepath to Clipboard',
-                          'isVisible': scope_mediahub_objects,
-                          'execute': process_selection_mediahub,
-                          'minimumVersion': '2025.0.0.0',
-                        }]
-            }]
+    menu_name = 'Copy...'
+    action = {
+        'name': 'Filepath to Clipboard',
+        'isVisible': scope_mediahub_objects,
+        'execute': process_selection_mediahub,
+        'minimumVersion': '2025.0.0.0'
+    }
+    menu = {'name': menu_name, 'actions': [action]}
+    return [menu]
 
 
 def get_media_panel_custom_ui_actions():
     """Python hook to add item to Media Panel or Desktop Reels right click menu."""
-    return [{'name': 'Copy...',
-             'actions': [{'name': 'Filepath to Clipboard',
-                          'isVisible': scope_media_panel_objects,
-                          'execute': process_selection_media_panel,
-                          'minimumVersion': '2025.0.0.0',
-                        }]
-            }]
+    menu_name = 'Copy...'
+    action = {
+        'name': 'Filepath to Clipboard',
+        'isVisible': scope_media_panel_objects,
+        'execute': process_selection_media_panel,
+        'minimumVersion': '2025.0.0.0'
+    }
+    menu = {'name': menu_name, 'actions': [action]}
+    return [menu]
 
 
 def get_timeline_custom_ui_actions():
     """Python hook to add custom right click menu item to Timeline."""
-    return [{'name': 'Copy...',
-             'actions': [{'name': 'Filepath to Clipboard',
-                          'isVisible': scope_timeline_objects,
-                          'execute': process_selection_timeline,
-                          'minimumVersion': '2025.0.0.0'}]
-           }]
+    menu_name = 'Copy...'
+    action = {
+        'name': 'Filepath to Clipboard',
+        'isVisible': scope_timeline_objects,
+        'execute': process_selection_timeline,
+        'minimumVersion': '2025.0.0.0'
+    }
+    menu = {'name': menu_name, 'actions': [action]}
+    return [menu]
