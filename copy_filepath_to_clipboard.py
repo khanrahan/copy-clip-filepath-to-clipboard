@@ -16,9 +16,10 @@ Description:
 
 Menus:
 
-    Right-click selected items in the MediaHub --> Copy... --> Filepath to Clipboard
-    Right-click selected items on the Desktop --> Copy... --> Filepath to Clipboard
-    Right-click selected items in the Media Panel --> Copy... --> Filepath to Clipboard
+    Right-click selected items on the Desktop > Copy... > Filepath to Clipboard
+    Right-click selected items in the MediaHub > Copy... > Filepath to Clipboard
+    Right-click selected items in the Media Panel > Copy... > Filepath to Clipboard
+    Right-click selected items in the Timeline > Copy... > Filepath to Clipboard
 
 To Install:
 
